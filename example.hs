@@ -17,7 +17,8 @@ baz = do
     liftT $ state $ \i -> ((), i + (1 :: Int))
 
 -- A flexible transformer monad stack composed of two other flexible
--- transformer monad stacks.
+-- transformer monad stacks. Note bar and baz have different constraints on
+-- their stacks, but can still be used together.
 foo :: (In (StateT Int) t, In ListT t) => t ()
 foo = do
     bar

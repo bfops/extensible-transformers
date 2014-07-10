@@ -1,7 +1,8 @@
 extensible-transformers adds flexibility to otherwise unwieldy Monad
 transformer stacks, by adding the `liftT` function to lift Monad transformers
-into arbitrary positions in the stack. This allows for flexible, independent
-composition offered by
+into arbitrary positions in the stack. It also offers type-level constraints
+to be used in place of a rigid Monad transformer stacks. This combination
+allows for flexible, independent composition offered by
 [extensible-effects](http://hackage.haskell.org/package/extensible-effects),
 but integrating into the existing Monad transformer architecture, allowing us
 to use existing transformers almost as easily as we use already-lifted
@@ -28,7 +29,8 @@ For example:
         liftT $ state $ \i -> ((), i + (1 :: Int))
 
     -- A flexible transformer monad stack composed of two other flexible
-    -- transformer monad stacks.
+    -- transformer monad stacks. Note bar and baz have different constraints
+    -- on their stacks, but can still be used together.
     foo :: (In (StateT Int) t, In ListT t) => t ()
     foo = do
         bar
