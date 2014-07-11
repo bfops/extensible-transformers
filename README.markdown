@@ -31,8 +31,9 @@ For example:
     -- A flexible transformer monad stack composed of two other flexible
     -- transformer monad stacks. Note bar and baz have different constraints
     -- on their stacks, but can still be used together.
-    foo :: (In (StateT Int) t, In ListT t) => t ()
+    foo :: (In (StateT Int) t, In ListT t, MonadBase IO t) => t ()
     foo = do
+        liftBase $ putStrLn "foo"
         bar
         baz
 

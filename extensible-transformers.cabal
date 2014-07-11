@@ -27,6 +27,7 @@ executable example
     Main-is:          example.hs
     build-depends: base
                  , transformers
+                 , transformers-base
                  , extensible-transformers
 
 source-repository head
